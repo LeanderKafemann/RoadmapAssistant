@@ -1,0 +1,2 @@
+pyperclip >= 1.9.0
+naturalsize >= 1.0.14

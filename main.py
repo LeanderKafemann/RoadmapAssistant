@@ -1,0 +1,52 @@
+import pyperclip, naturalsize
+
+print("Willkommen beim Roadmap-Generator!")
+print("Sie nutzen Version 1.0.0--BETA-1\n")
+
+title = input("Titel der Roadmap: ")
+num_steps = int(input("Wie viele Schritte/Milestones? "))
+
+steps = []
+for i in range(1, num_steps + 1):
+    step_title = input(f"Titel fuer Schritt {i}: ")
+    step_desc = input(f"Beschreibung fuer Schritt {i}: ")
+    steps.append((step_title, step_desc))
+
+html = f"""<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>{title}</title>
+  <link rel="stylesheet" href="https://buero-os-toolkit-development.github.io/BueroWebKit/styling/style.css">
+  <link rel="stylesheet" href="https://leanderkafemann.github.io/RoadmapAssistant/roadmap.css">
+</head>
+<body class="bwk-bg-neutral-100">
+  <div class="bwk-container bwk-mt-5">
+    <h1 class="bwk-text-center bwk-mb-4">{title}</h1>
+    <ol class="roadmap">
+"""
+
+for step_title, step_desc in steps:
+    html += f"""      <li>
+        <div class="step-title">{step_title}</div>
+        <div class="step-desc">{step_desc}</div>
+      </li>
+"""
+
+html += """    </ol>
+  </div>
+</body>
+</html>
+"""
+
+print("HTML generiert und in die Zwischenablage kopiert:")
+pyperclip.copy(html)
+print(30*"-")
+print(html)
+print(30*"-")
+if input("Als Datei exportieren (j/n)? ") == "j":
+    with open("roadmap.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
+print("Fertig!")
+naturalsize.special_starter()

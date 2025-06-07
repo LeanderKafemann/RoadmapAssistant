@@ -1,0 +1,29 @@
+.roadmap {
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 0;
+    list-style-position: inside;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px #ccc;
+}
+
+    .roadmap li {
+        margin-bottom: 1em;
+        padding: 1em;
+        border-bottom: 1px solid #eee;
+    }
+
+        .roadmap li:last-child {
+            border-bottom: none;
+        }
+
+.step-title {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.step-desc {
+    margin-top: 0.5em;
+    color: #333;
+}
