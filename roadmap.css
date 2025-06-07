@@ -12,15 +12,28 @@
         margin-bottom: 1em;
         padding: 1em;
         border-bottom: 1px solid #eee;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+        cursor: pointer;
     }
 
         .roadmap li:last-child {
             border-bottom: none;
         }
 
+        .roadmap li:hover {
+            background: #f5f7fa;
+            box-shadow: 0 4px 16px #bbb;
+            transform: translateY(-2px) scale(1.01);
+        }
+
 .step-title {
     font-weight: bold;
     font-size: 1.1em;
+    transition: color 0.2s;
+}
+
+.roadmap li:hover .step-title {
+    color: #0078d4;
 }
 
 .step-desc {
