@@ -1,2 +1,2 @@
 # RoadmapAssistant
-creates HTML/CSS/JS code for roadmap websites
+creates HTML code for roadmap websites
