@@ -10,10 +10,12 @@ li {
     box-shadow: 0 2px 12px #bbb;
     padding: 2em 1em;
     position: relative;
+    transition: all 0.2s;
 }
 
     .roadmap-wrapper:hover {
         box-shadow: 0 4px 24px #bbb;
+        background: #f0f4f8;
     }
 
 .roadmap-list {
@@ -36,12 +38,19 @@ li {
 .roadmap-end {
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 8px #d0d0d0;
+    box-shadow: 0 1px 4px #d0d0d0;
     margin: 0 auto;
     padding: 1.2em 1em;
     max-width: 500px;
     transition: box-shadow 0.2s, background 0.2s;
 }
+
+    .roadmap-step:hover,
+    .roadmap-start:hover,
+    .roadmap-end:hover {
+        box-shadow: 0 2px 8px #d0d0d0;
+        background: #f0f0f0;
+    }
 
     .roadmap-step details,
     .roadmap-start,
