@@ -7,3 +7,6 @@ creates HTML code for roadmap websites
 - customize the roadmap with your own content
 - use already existing CSS styles
 - give us your feedback to improve the tool
+
+# Roadmap
+visit the GitHub Pages page for the roadmap: [Roadmap](https://leanderkafemann.github.io/RoadmapAssistant/)
