@@ -3,6 +3,7 @@ creates HTML code for roadmap websites<br/>
 
 # Features
 - create a roadmap website easily from a commandline<br/>
+- create a roadmap website easily using a UI<br/>
 - get a ready-to-use HTML code<br/>
 - customize the roadmap with your own content<br/>
 - use already existing CSS styles<br/>

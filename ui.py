@@ -12,27 +12,20 @@ c.pack()
 print("Willkommen beim Roadmap-Generator!", "Roadmap-Generator")
 print("Sie nutzen Version 2.0.0 (Copyright Leander Kafemann 2025)\n")
 
-alert("Willkommen beim Roadmap-Generator!")
+alert("Willkommen beim Roadmap-Generator!", "Roadmap-Generator")
 
 title = prompt("Titel der Roadmap:", "Roadmap-Generator")
-num_steps = int(input("Wie viele Schritte/Milestones? "))
 
-steps = []
-for i in range(1, num_steps + 1):
-    step_title = input(f"Titel fuer Schritt {i}: ")
-    step_title = step_title.replace("ü", "&uuml;").replace("ä", "&auml;").replace("ö", "&ouml;").replace("ß", "&szlig;")
-    step_title = step_title.replace("Ü", "&Uuml;").replace("Ä", "&Auml;").replace("Ö", "&Ouml;")
-    step_desc = input(f"Beschreibung fuer Schritt {i}: ")
-    step_desc = step_desc.replace("ü", "&uuml;").replace("ä", "&auml;").replace("ö", "&ouml;").replace("ß", "&szlig;")
-    step_desc = step_desc.replace("Ü", "&Uuml;").replace("Ä", "&Auml;").replace("Ö", "&Ouml;")
-    steps.append((step_title, step_desc))
+c.num_steps = 1
+c.steps = [("", "")]
+c.aktStep = 0
 
 def export():
     html = f"""<!DOCTYPE html>
     <html lang="de">
     <head>
       <meta charset="UTF-8">
-      <title>{title}</title>
+      <title>{html_fit(title)}</title>
       <link rel="stylesheet" href="https://buero-os-toolkit-development.github.io/BueroWebKit/styling/style.css">
       <link rel="stylesheet" href="roadmap.css">
     </head>
@@ -45,13 +38,13 @@ def export():
             <li class="roadmap-start">Status Quo</li>
     """
 
-    for idx, (step_title, step_desc) in enumerate(steps):
+    for idx, (step_title, step_desc) in enumerate(c.steps):
         html += """        <div class="roadmap-arrow">↓</div>
     """
         html += f"""        <li class="roadmap-step">
               <details>
-                <summary>{step_title}</summary>
-                <div class="step-desc">{step_desc}</div>
+                <summary>{html_fit(step_title)}</summary>
+                <div class="step-desc">{html_fit(step_desc)}</div>
               </details>
             </li>
     """
@@ -79,6 +72,10 @@ def export():
     if confirm("Als Datei exportieren?", "Roadmap-Generator", buttons=("Fortfahren", "Abbrechen")) == "Fortfahren":
         with open("roadmap.html", "w", encoding="utf-8") as f:
             f.write(html)
+        alert("Roadmap erfolgreich in 'roadmap.html' gespeichert!", "Roadmap-Generator")
+
+def html_fit(str_: str) -> str:
+    return str_.replace("ü", "&uuml;").replace("ä", "&auml;").replace("ö", "&ouml;").replace("ß", "&szlig;").replace("Ü", "&Uuml;").replace("Ä", "&Auml;").replace("Ö", "&Ouml;")
 
 def quit_():
     quit(code="exit")
@@ -87,11 +84,32 @@ def reset():
     c.titel.delete("1.0", END)
     c.inhalt.delete("1.0", END)
 
+def saveAktStep():
+    c.steps[c.aktStep] = (c.titel.get("1.0", END), c.inhalt.get("1.0", END))
+
+def actualizeContent():
+    c.titel.insert("1.0", c.steps[c.aktStep][0])
+    c.inhalt.insert("1.0", c.steps[c.aktStep][1])
+    c.itemconfig(c.info_text, text=f"Beschreibung und Titel eingeben - Schritt {c.aktStep+1} / {len(c.steps)}")
+
 def next_():
-    pass
+    saveAktStep()
+    c.aktStep += 1
+    reset()
+    if c.aktStep > len(c.steps)-1:
+        c.steps.append(("", ""))
+        actualizeContent()
+    else:
+        actualizeContent()
 
 def last_():
-    pass
+    if c.aktStep > 0:
+        saveAktStep()
+        c.aktStep -= 1
+        reset()
+        actualizeContent()
+    else:
+        print("Schon beim ersten Schritt!")
 
 c.create_text(325, 50, text="Roadmap-Generator", font=("Verdana", 24, "bold"))
 c.create_text(325, 840, text="Copyright 2025 Leander Kafemann  -  Version 2.0.0", font=("Verdana", 10))
@@ -106,13 +124,15 @@ c.create_window(10, 250, height=480, width=630, window=c.inhalt, anchor="nw")
 c.titel = Text(root, wrap="none", font=("Verdana", "18"))
 c.create_window(180, 150, height=40, width=420, window=c.titel, anchor="w")
 
-c.colorB = Button(master=root, command=next_, text="Vorheriger Schritt", background="light blue", relief="ridge", font=("Verdana", "10"))
+c.colorB = Button(master=root, command=last_, text="Vorheriger Schritt", background="light blue", relief="ridge", font=("Verdana", "10"))
 c.create_window(25, 740, anchor="nw", window=c.colorB, height=30, width=290)
-c.styleB = Button(master=root, command=last_, text="Nächster Schritt", background="light blue", relief="ridge", font=("Verdana", "10"))
+c.styleB = Button(master=root, command=next_, text="Nächster Schritt", background="light blue", relief="ridge", font=("Verdana", "10"))
 c.create_window(625, 740, anchor="ne", window=c.styleB, height=30, width=290)
 
 c.create_window(25, 775, anchor="nw", window=Button(master=root, command=export, text="Exportieren", background="light blue", relief="ridge"), height=40, width=180)
 c.create_window(235, 775, anchor="nw", window=Button(master=root, command=reset, text="Reset", background="light blue", relief="ridge"), height=40, width=180)
 c.create_window(445, 775, anchor="nw", window=Button(master=root, command=quit_, text="Beenden", background="light blue", relief="ridge"), height=40, width=180)
+
+print()
 
 root.mainloop()

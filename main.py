@@ -1,7 +1,7 @@
 ﻿import pyperclip, naturalsize
 
 print("Willkommen beim Roadmap-Generator!")
-print("Sie nutzen Version 1.0.0 (Copyright Leander Kafemann 2025)\n")
+print("Sie nutzen Version 2.0.0 (Copyright Leander Kafemann 2025)\n")
 
 title = input("Titel der Roadmap: ")
 num_steps = int(input("Wie viele Schritte/Milestones? "))
