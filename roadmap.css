@@ -45,11 +45,19 @@ li {
     transition: box-shadow 0.2s, background 0.2s;
 }
 
-    .roadmap-step:hover,
-    .roadmap-start:hover,
-    .roadmap-end:hover {
+    .roadmap-step:hover {
         box-shadow: 0 2px 8px #d0d0d0;
         background: #f0f0f0;
+    }
+
+    .roadmap-start:hover {
+        box-shadow: 0 2px 8px #d0d0d0;
+        background: #e0ffe0;
+    }
+
+    .roadmap-end:hover {
+        box-shadow: 0 2px 8px #d0d0d0;
+        background: #ffe0e0;
     }
 
     .roadmap-step details,
@@ -60,6 +68,7 @@ li {
 
         .roadmap-step details[open] {
             background: #f0f6ff;
+            border-radius: 10px;
         }
 
         .roadmap-step details summary {
