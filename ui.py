@@ -21,6 +21,7 @@ c.steps = [("", "")]
 c.aktStep = 0
 
 def export():
+    saveAktStep()
     html = f"""<!DOCTYPE html>
     <html lang="de">
     <head>
