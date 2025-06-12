@@ -22,7 +22,7 @@ html = f"""<!DOCTYPE html>
   <meta charset="UTF-8">
   <title>{title}</title>
   <link rel="stylesheet" href="https://buero-os-toolkit-development.github.io/BueroWebKit/styling/style.css">
-  <link rel="stylesheet" href="roadmap.css">
+  <link rel="stylesheet" href="https://leanderkafemann.github.io/RoadmapAssistant/roadmap.css">
 </head>
 <body class="bwk-bg-neutral-100">
   <div class="bwk-container bwk-mt-5">
